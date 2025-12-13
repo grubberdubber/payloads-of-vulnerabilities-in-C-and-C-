@@ -1,0 +1,266 @@
+A
+AA
+AAA
+AAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+0
+-1
+1
+2
+10
+127
+128
+255
+256
+512
+1024
+2048
+4096
+8192
+16384
+32767
+32768
+65535
+65536
+2147483647
+2147483648
+4294967295
+-2147483648
+-9223372036854775808
+9223372036854775807
+
+test
+TEST
+testtest
+test_test
+test-test
+test.test
+test/test
+../
+../../
+../../../
+./
+//
+..\\
+..\\..\\
+C:\\
+/etc/passwd
+
+%s
+%x
+%n
+%p
+%lld
+%llu
+%999999s
+
+\x00
+\x00\x00
+\x00A\x00
+\xff
+\xff\xff\xff
+\x01\x02\x03\x04
+\x7f\x45\x4c\x46
+\x89PNG
+PK\x03\x04
+GIF89a
+\x00\xff\x00\xff
+
+true
+false
+null
+NULL
+None
+undefined
+
+a=b
+a=
+=b
+a=b&c=d
+a=1&b=2&c=3
+a=AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+a=2147483647
+a=-1
+a=%00
+a=%ff
+a=%25%32%35
+a=%u0000
+a=%2500
+
+username
+password
+admin
+guest
+administrator
+root
+user
+user@domain.com
+DOMAIN\\user
+user:password
+user|password
+user,password
+
+{"a":1}
+{"a":"b"}
+{"a":""}
+{"a":null}
+{"a":true}
+{"a":false}
+{"a":[]}
+{"a":{}}
+{"a":[1,2,3]}
+{"a":{"b":"c"}}
+{"a":2147483647}
+{"a":-1}
+{"a":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
+{"a":{"a":{"a":{"a":{"a":"b"}}}}}
+{"a":[[[[[1]]]]]}
+{}
+[]
+{"":""}
+{"a":0}
+{"a":-0}
+{"a":1.0}
+{"a":-1.0}
+{"a":1e10}
+{"a":1e309}
+{"a":-1e309}
+{"a":"\u0000"}
+
+<root/>
+<root></root>
+<root>test</root>
+<root><a>1</a></root>
+<root><a/></root>
+<root><a></a><a></a></root>
+<root><a><b><c>1</c></b></a></root>
+<a><a><a><a><a/></a></a></a></a>
+<!DOCTYPE root>
+<!DOCTYPE root [ <!ENTITY x "x"> ]>
+<!DOCTYPE root [ <!ENTITY x SYSTEM "file:///etc/passwd"> ]>
+
+GET /
+POST /
+PUT /
+DELETE /
+OPTIONS /
+HEAD /
+TRACE /
+
+GET /test HTTP/1.1
+POST /api HTTP/1.1
+Content-Length: 0
+Content-Length: -1
+Content-Length: 10
+Content-Length: 999999999
+Transfer-Encoding: chunked
+0
+
+PING
+PONG
+HELLO
+BYE
+STATUS
+STATS
+INFO
+AUTH
+AUTH none
+AUTH test
+AUTH AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+USER test
+USER anonymous
+USER root
+PASS test
+PASS anonymous
+PASS AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+QUIT
+NOOP
+LIST
+RETR test
+STOR test
+
+SSH-2.0-OpenSSH_7.4
+SSH-2.0-AAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+CREATE A
+UPDATE A
+DELETE A
+USE A
+CREATE A
+DELETE A
+USE A
+CREATE A
+CREATE A
+
+a,b,c
+a,,b
+a|b|c
+a||b
+a:b:c
+a;;b
+a b c
+a	b	c
+a
+b
+c
+
+10:AAAAAAAAAA
+-1:AAAA
+0:
+AAAA,AAAA,AAAA
+a;b|c,d
+
+example.com
+example..com
+.example.com
+example.com.
+*.example.com
+A
+AAAA
+CNAME
+MX
+TXT
+
+------
+------BOUNDARY
+------BOUNDARY--
+------BOUNDARY
+Content-Disposition: form-data; name="file"; filename="a.txt"
+
+A
+------BOUNDARY--
+
+------BOUNDARY
+Content-Disposition: form-data; name="file"; filename="a.txt"
+Content-Type: application/octet-stream
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+------BOUNDARY--
+
+../../../../../../../../../../
+..\\..\\..\\..\\
+
+\0
+\00
+\000
+\0000
+
+ÿ
+�
+Ω
+Ж
+漢字
+🙂
+
+AAAAAAAA\0BBBBBBBB
+AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD
+
+END
+EOF
+.
+..
+...
