@@ -1,266 +1,336 @@
-A
-AA
-AAA
-AAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+################################################################################
+# PAYLOADS MAESTROS PARA FUZZING DE BINARIOS / PROGRAMAS NATIVOS (C/C++/Rust/Go/etc)
+# Uso: alimentar como seeds/dict a AFL++, radamsa, honggfuzz, libFuzzer, o
+# usarlos manualmente vía stdin, argv, archivos de entrada o variables de entorno.
+# Organización: separado por secciones con headers "### NOMBRE ###"
+################################################################################
 
-0
+### INTEGER OVERFLOW / UNDERFLOW / SIGNEDNESS - BOUNDARY VALUES ###
+# Un valor por línea. Probar también su representación hex/oct/binaria.
+
+-128
 -1
+0
 1
-2
-10
 127
 128
 255
 256
-512
-1024
-2048
-4096
-8192
-16384
+-32768
+-32769
 32767
 32768
 65535
 65536
+-2147483648
+-2147483649
 2147483647
 2147483648
 4294967295
--2147483648
+4294967296
 -9223372036854775808
+-9223372036854775809
 9223372036854775807
+9223372036854775808
+18446744073709551615
+18446744073709551616
+-1
+0
+1
+2
+3
+4
+7
+8
+15
+16
+31
+32
+63
+64
+127
+128
+255
+256
+511
+512
+1023
+1024
+4095
+4096
+65535
+65536
+0x7fffffff
+0x80000000
+0xffffffff
+0x100000000
+0xfffffffe
+0x7fffffffffffffff
+0x8000000000000000
+nan
+-nan
+inf
+-inf
+infinity
+1e400
+-1e400
+1e-400
+0.0/0.0
 
-test
-TEST
-testtest
-test_test
-test-test
-test.test
-test/test
-../
-../../
-../../../
-./
-//
-..\\
-..\\..\\
-C:\\
-/etc/passwd
+### FORMAT STRING PAYLOADS (printf/fprintf/syslog/scanf inseguros) ###
 
 %s
 %x
+%d
 %n
 %p
-%lld
-%llu
-%999999s
+%%
+%s%s%s%s%s%s%s%s%s%s
+%x%x%x%x%x%x%x%x%x%x
+%n%n%n%n%n%n%n%n%n%n
+%p%p%p%p%p%p%p%p%p%p
+%.1000000d
+%99999999999s
+%1$s
+%1$n
+%1$x
+%2$s
+%08x.%08x.%08x.%08x
+%s%p%x%d
+AAAA%08x.%08x.%08x.%08x.%08x.%08x.%08x
+AAAA%n
+%*d
+%99999d
+%-99999999d
+%(x)s
 
-\x00
-\x00\x00
-\x00A\x00
-\xff
-\xff\xff\xff
-\x01\x02\x03\x04
-\x7f\x45\x4c\x46
-\x89PNG
-PK\x03\x04
-GIF89a
-\x00\xff\x00\xff
-
-true
-false
-null
-NULL
-None
-undefined
-
-a=b
-a=
-=b
-a=b&c=d
-a=1&b=2&c=3
-a=AAAAAAAAAAAAAAAAAAAAAAAAAAAA
-a=2147483647
-a=-1
-a=%00
-a=%ff
-a=%25%32%35
-a=%u0000
-a=%2500
-
-username
-password
-admin
-guest
-administrator
-root
-user
-user@domain.com
-DOMAIN\\user
-user:password
-user|password
-user,password
-
-{"a":1}
-{"a":"b"}
-{"a":""}
-{"a":null}
-{"a":true}
-{"a":false}
-{"a":[]}
-{"a":{}}
-{"a":[1,2,3]}
-{"a":{"b":"c"}}
-{"a":2147483647}
-{"a":-1}
-{"a":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"}
-{"a":{"a":{"a":{"a":{"a":"b"}}}}}
-{"a":[[[[[1]]]]]}
-{}
-[]
-{"":""}
-{"a":0}
-{"a":-0}
-{"a":1.0}
-{"a":-1.0}
-{"a":1e10}
-{"a":1e309}
-{"a":-1e309}
-{"a":"\u0000"}
-
-<root/>
-<root></root>
-<root>test</root>
-<root><a>1</a></root>
-<root><a/></root>
-<root><a></a><a></a></root>
-<root><a><b><c>1</c></b></a></root>
-<a><a><a><a><a/></a></a></a></a>
-<!DOCTYPE root>
-<!DOCTYPE root [ <!ENTITY x "x"> ]>
-<!DOCTYPE root [ <!ENTITY x SYSTEM "file:///etc/passwd"> ]>
-
-GET /
-POST /
-PUT /
-DELETE /
-OPTIONS /
-HEAD /
-TRACE /
-
-GET /test HTTP/1.1
-POST /api HTTP/1.1
-Content-Length: 0
-Content-Length: -1
-Content-Length: 10
-Content-Length: 999999999
-Transfer-Encoding: chunked
-0
-
-PING
-PONG
-HELLO
-BYE
-STATUS
-STATS
-INFO
-AUTH
-AUTH none
-AUTH test
-AUTH AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-USER test
-USER anonymous
-USER root
-PASS test
-PASS anonymous
-PASS AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-QUIT
-NOOP
-LIST
-RETR test
-STOR test
-
-SSH-2.0-OpenSSH_7.4
-SSH-2.0-AAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-CREATE A
-UPDATE A
-DELETE A
-USE A
-CREATE A
-DELETE A
-USE A
-CREATE A
-CREATE A
-
-a,b,c
-a,,b
-a|b|c
-a||b
-a:b:c
-a;;b
-a b c
-a	b	c
-a
-b
-c
-
-10:AAAAAAAAAA
--1:AAAA
-0:
-AAAA,AAAA,AAAA
-a;b|c,d
-
-example.com
-example..com
-.example.com
-example.com.
-*.example.com
-A
-AAAA
-CNAME
-MX
-TXT
-
-------
-------BOUNDARY
-------BOUNDARY--
-------BOUNDARY
-Content-Disposition: form-data; name="file"; filename="a.txt"
-
-A
-------BOUNDARY--
-
-------BOUNDARY
-Content-Disposition: form-data; name="file"; filename="a.txt"
-Content-Type: application/octet-stream
+### BUFFER OVERFLOW - PATRONES CLÁSICOS ###
+# Para overflow real de longitud variable, usar gen_cyclic.py (De Bruijn)
+# en vez de repetir 'A' - permite hallar el offset exacto del crash.
 
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-------BOUNDARY--
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+%s%s%s%s AAAA
+\x41\x41\x41\x41
+\x90\x90\x90\x90\x90\x90\x90\x90
+\x00\x00\x00\x00\x00\x00\x00\x00
+\xff\xff\xff\xff\xff\xff\xff\xff
+\x7f\x7f\x7f\x7f
+\x80\x80\x80\x80
+AAAA\x00AAAA
+AAAA\r\n\r\nAAAA
+AAAA\nAAAA
+"A"*8
+"A"*16
+"A"*64
+"A"*256
+"A"*1024
+"A"*4096
+"A"*65536
+"A"*1048576
+"A"*16777216
 
-../../../../../../../../../../
-..\\..\\..\\..\\
+### UNICODE / ENCODING EDGE CASES ###
+# Rompen parsers que asumen ASCII o mezclan longitud en bytes vs codepoints
 
-\0
-\00
-\000
-\0000
+\xc0\xaf
+\xe0\x80\xaf
+\xf0\x80\x80\xaf
+\xc1\x9c
+\xef\xbb\xbf
+\xe2\x80\x8b
+\xe2\x80\x8c
+\xe2\x80\x8d
+\xe2\x80\x8e
+\xe2\x80\x8f
+\xe2\x80\xaeexe.txt
+gpj.exe\xe2\x80\xae
+café
+cafe\u0301
+\xd0\xb0dmin
+\xd1\x80aypal
+\ud800
+\udfff
+\ud800\ud800
+\udc00\udc00
+AAAA\x00BBBB
+\x00
+\u0000
+\U0001F468\u200D\U0001F469\u200D\U0001F467\u200D\U0001F466
+\xf4\x8f\xbf\xbf
+\x80
+\x81
+\xfe
+\xff
+\xc0\x00
+\xe0\x00\x00
 
-ÿ
-�
-Ω
-Ж
-漢字
-🙂
+### PATH / FILENAME FUZZING (argv, rutas de config, nombres embebidos en formatos) ###
 
-AAAAAAAA\0BBBBBBBB
-AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD
+../
+..\
+....//
+....\/
+%2e%2e%2f
+%2e%2e/
+..%2f
+%2e%2e%5c
+..%c0%af
+..%c1%9c
+/etc/passwd
+C:\Windows\System32\drivers\etc\hosts
+\\?\C:\Windows\System32
+file:///etc/passwd
+../../../../../../../../../../etc/passwd
+..\..\..\..\..\..\..\..\..\..\windows\win.ini
+/proc/self/environ
+/proc/self/maps
+/proc/self/cmdline
+/dev/null
+/dev/zero
+/dev/random
+/dev/full
+CON
+PRN
+AUX
+NUL
+COM1
+LPT1
+a" * 4096 con extensión final ".exe"
+nombre_con_null_byte_medio\x00.txt
 
-END
-EOF
-.
-..
-...
+### ARGV / CLI ARGUMENT FUZZING ###
+# Para programas que parsean argumentos de línea de comandos (getopt, argparse nativo, etc)
+
+-
+--
+---
+-h
+--help
+-v
+--version
+-1
+--1
+-9999999999
+-0x7fffffff
+--flag=
+--flag=%s
+--flag=%n
+--flag=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+-a -a -a -a -a -a -a -a -a -a -a -a -a -a -a -a
+--
+-- -- --
+""
+' '
+$(echo hola)
+`echo hola`
+$IFS
+${IFS}
+--flag=$(id)
+--flag=`id`
+
+### VARIABLES DE ENTORNO FUZZING (getenv inseguro, LD_PRELOAD, PATH hijacking) ###
+
+LD_PRELOAD=/tmp/evil.so
+LD_LIBRARY_PATH=/tmp
+PATH=
+PATH=.
+HOME=/dev/null
+TMPDIR=/nonexistent
+IFS=$'\n'
+LANG=C.UTF-8-broken
+TZ=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+LC_ALL=%n%n%n%n
+
+### NULL BYTES / TERMINACIÓN DE STRING INESPERADA ###
+
+\x00
+AAAA\x00
+\x00AAAA
+AAAA\x00AAAA
+\x00\x00\x00\x00
+%00
+%00%00%00%00
+
+### FILE FORMAT MAGIC BYTES (para fuzzing de parsers de formatos embebidos) ###
+# Header incorrecto/truncado/corrupto - útil para probar detección de tipo (libmagic, etc)
+
+\x7fELF (trunco a 1 byte: \x7f)
+\x7fELG (magic corrupto)
+\x89PNG\r\n\x1a\n (trunco a header sin IHDR)
+GIF87a (sin trailer)
+GIF89a (con IHDR de PNG pegado después, formato mixto)
+%PDF-1.4 (sin xref table)
+PK\x03\x04 (ZIP local header sin central directory)
+\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1 (OLE2/MS Office corrupto)
+BM (BMP header truncado)
+\xff\xd8\xff (JPEG sin EOI marker)
+RIFF....WAVEfmt (WAV con chunk size mentiroso)
+\x1f\x8b\x08 (gzip con CRC32 incorrecto)
+7z\xbc\xaf\x27\x1c (7zip header con tamaño mentiroso)
+
+### ELF ESPECÍFICO (headers, tags de sección/programa) ###
+
+\x7fELF\x01\x01\x01\x00 (ELF32 LE, version inconsistente en header vs seccion)
+\x7fELF\x02\x02\x01\x00 (ELF64 BE - poco común, expone bugs de endianness)
+e_phnum=0xffff (número de program headers absurdo)
+e_shnum=0xffff (número de section headers absurdo)
+e_shstrndx fuera de rango
+p_filesz > p_memsz (o al revés) en un PT_LOAD
+sh_offset apuntando fuera del archivo
+sh_size = 0xffffffff
+
+### INTEGER FIELDS EN HEADERS DE FORMATOS BINARIOS (length-prefixed data) ###
+# Aplica a cualquier formato TLV (type-length-value): protobuf, ASN.1, custom binary protocols
+
+length_field = 0x00000000 (longitud cero con datos presentes)
+length_field = 0xffffffff (longitud máxima, provoca overflow en malloc(len+1))
+length_field = valor_negativo_interpretado_como_size_t_enorme
+length_field > tamaño_real_del_archivo (leer fuera de los límites)
+length_field = 1 pero datos_reales = 1000000 (truncamiento)
+nested_length_field_mayor_que_outer_length (TLV anidado inconsistente)
+count_field = 0xffffffff con array de tamaño fijo (bucle de asignación masiva)
+
+### DESERIALIZACIÓN / SERIALIZACIÓN BINARIA (protobuf, MessagePack, BSON, custom) ###
+
+varint_con_continuation_bit_infinito (0xff 0xff 0xff ... sin terminar, DoS de parseo)
+type_tag_desconocido_o_reservado
+recursion_profunda_de_mensajes_anidados (stack overflow por recursión no acotada)
+field_number_duplicado_con_valores_distintos
+field_number_negativo
+map_con_millones_de_entradas_declaradas_pero_pocos_bytes_reales
+
+### RACE CONDITION / TOCTOU (para programas que abren archivos por ruta) ###
+# No son "payloads" de datos sino de timing - útil documentarlos para harness custom
+
+symlink_creado_entre_stat_y_open
+archivo_reemplazado_entre_check_y_use
+hardlink_a_archivo_privilegiado
+
+### SIGNAL / RECURSOS DEL SISTEMA (para provocar estados inesperados) ###
+
+input_que_causa_allocacion_de_memoria_no_acotada (para probar OOM handling)
+input_con_loop_de_expansión_exponencial (ej. "billion laughs" adaptado a binarios: 
+  referencias circulares en formatos con backreferences, como LZ77 malformado)
+compresión_con_ratio_de_expansión_extremo (zip bomb: pocos bytes -> GB descomprimidos)
+recursión_de_symlinks_circular (a -> b -> a)
+
+### ENDIANNESS / ALINEACIÓN ###
+
+mismo_valor_en_big_endian_cuando_se_espera_little_endian
+struct_con_padding_inconsistente_entre_arquitecturas
+acceso_no_alineado_a_entero_de_4_u_8_bytes (SIGBUS en ARM/SPARC estrictos)
+
+################################################################################
+# NOTAS DE USO
+# - Para overflow de longitud variable real, generar con gen_cyclic.py en vez
+#   de repetir "A" (permite hallar el offset exacto del registro sobreescrito).
+# - Para compresión (zip bombs, gzip bombs), generar dinámicamente:
+#     python3 -c "open('bomb.gz','wb').write(__import__('gzip').compress(b'A'*10**9))"
+# - Combina estos payloads con AFL++/radamsa como diccionario o mutando estas
+#   líneas como semillas, no los uses standalone esperando que "algo pase":
+#   son *building blocks*, el fuzzer los mutará y combinará por vos.
+# - Muchos de estos requieren generación programática (no son texto plano
+#   directo), están descritos aquí para que armes el harness/generador según
+#   el formato específico de tu target.
+################################################################################
